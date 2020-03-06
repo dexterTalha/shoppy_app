@@ -186,6 +186,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            fontFamily: 'SFUIDisplay'
+          ),
+        ),
         actions: <Widget>[
           Center(
             child: Padding(
