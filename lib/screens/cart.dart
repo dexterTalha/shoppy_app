@@ -1,5 +1,4 @@
 import 'package:shoppy_app/screens/details.dart';
-import 'package:shoppy_app/helpers/customer_page_route.dart';
 import 'package:shoppy_app/util/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/feather.dart';
@@ -111,7 +110,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
       padding: const EdgeInsets.only(top: 20.0, right: 20, left: 20),
       child: GestureDetector(
         onTap: (){
-          Navigator.push(context, CustomPageRoute(newPage: Details(index, "cart")));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Details(index.toString(), "cart")));
         },
         child: Material(
           borderRadius: BorderRadius.circular(10),
