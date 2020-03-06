@@ -39,14 +39,11 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: EdgeInsets.only(left: 20),
-                child: DelayedAnimation(
-                  delay: 500,
-                  child: Text(
-                    "Favourites",
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
+                child: Text(
+                  "Favourites",
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -55,7 +52,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               height: 20,
             ),
             DelayedAnimation(
-              delay: 500,
+              delay: 300,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20),
                 child: Card(

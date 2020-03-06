@@ -15,7 +15,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   PageController _pageController;
   int _page = 0;
-  var screens = [Home(), FavouritesScreen(), ProfileScreen(), DiscoverScreen()];
+  var screens = [Home(), FavouritesScreen(), DiscoverScreen(), ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +59,18 @@ class _MainScreenState extends State<MainScreen> {
 
             BottomNavigationBarItem(
               icon: Icon(
+                Feather.getIconData("tag"),
+              ),
+              title: Container(height: 0.0),
+            ),
+            
+            BottomNavigationBarItem(
+              icon: Icon(
                 Feather.getIconData("user"),
               ),
               title: Container(height: 0.0),
             ),
 
-            BottomNavigationBarItem(
-              icon: Icon(
-                Feather.getIconData("grid"),
-              ),
-              title: Container(height: 0.0),
-            ),
           ],
           onTap: navigationTapped,
           currentIndex: _page,
