@@ -1,4 +1,6 @@
+import 'package:shoppy_app/helpers/customer_page_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppy_app/screens/cart.dart';
 
 class IconBadge extends StatefulWidget {
 
@@ -17,8 +19,13 @@ class _IconBadgeState extends State<IconBadge> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Icon(
-          widget.icon,
+        GestureDetector(
+          onTap: (){
+            Navigator.push(context, CustomPageRoute(newPage: ShoppingCart()));
+          },
+          child: Icon(
+            widget.icon,
+          ),
         ),
         Positioned(
           right: 0.0,

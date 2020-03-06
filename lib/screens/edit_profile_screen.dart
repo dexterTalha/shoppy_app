@@ -48,7 +48,7 @@ class _EditProfileState extends State<EditProfile> {
                             color: Colors.black, fontFamily: 'SFUIDisplay'),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Username',
+                            labelText: 'Full Name',
                             prefixIcon:
                                 Icon(Icons.person_outline, color: Colors.black),
                             labelStyle:
@@ -156,6 +156,7 @@ class _EditProfileState extends State<EditProfile> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Radio(
+          autofocus: true,
           activeColor: Theme.of(context).accentColor,
           value: gender[btnValue],
           groupValue: select,
