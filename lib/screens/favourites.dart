@@ -123,7 +123,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
     return DelayedAnimation(
       delay: 500,
       child: Padding(
-        padding: EdgeInsets.only(right: 20, left: 20, bottom: 20),
+        padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).push(
