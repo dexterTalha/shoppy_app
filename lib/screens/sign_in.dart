@@ -6,7 +6,6 @@ import 'package:shoppy_app/bloc/theme.dart';
 import 'package:shoppy_app/screens/sign_up.dart';
 import 'package:shoppy_app/util/const.dart';
 
-import 'main_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
