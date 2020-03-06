@@ -1,4 +1,6 @@
-import 'package:shoppy_app/widgets/badge.dart';
+import 'package:shoppy_app/screens/details.dart';
+import 'package:shoppy_app/helpers/customer_page_route.dart';
+import 'package:shoppy_app/util/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/feather.dart';
 
@@ -8,6 +10,19 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
+  int counter = 1;
+  _incrementCounter() {
+    counter++;
+    setState(() {});
+  }
+
+  _decrementCounter() {
+    if (counter > 0) {
+      counter--;
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +87,18 @@ class _ShoppingCartState extends State<ShoppingCart> {
               SizedBox(
                 height: 20,
               ),
-              generateCartItem()
+
+              ListView.builder(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: furnitures.length,
+                itemBuilder: (context, index){
+                  Map furniture = furnitures[index];
+                  return generateCartItem(furniture, index);
+                }
+              ),
+              
+
             ],
           ),
         ),
@@ -80,160 +106,185 @@ class _ShoppingCartState extends State<ShoppingCart> {
     );
   }
 
-  Widget generateCartItem() {
+  Widget generateCartItem(furniture, int index) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0, right: 20, left: 20),
-      child: Material(
-        borderRadius: BorderRadius.circular(10),
-        elevation: 6,
-        child: Container(
-          width: double.infinity,
-          height: 100,
-          child: Row(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  'assets/1.jpeg',
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
+      padding: const EdgeInsets.only(top: 20.0, right: 20, left: 20),
+      child: GestureDetector(
+        onTap: (){
+          Navigator.push(context, CustomPageRoute(newPage: Details(index, "cart")));
+        },
+        child: Material(
+          borderRadius: BorderRadius.circular(10),
+          elevation: 6,
+          child: Container(
+            width: double.infinity,
+            height: 100,
+            child: Row(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    '${furniture["img"]}',
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0, left: 12.0, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "New Product",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Flexible(
-                      child: Text(
-                        "Description lorem ipsum",
+                Padding(
+                  padding:
+                      const EdgeInsets.only(top: 5.0, left: 12.0, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "${furniture["name"]}",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        softWrap: true,
-                        textAlign: TextAlign.start,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Flexible(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Flexible(
+                        child: Text(
+                          "Description lorem ipsum",
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          softWrap: true,
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Flexible(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              "\$500",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Material(
+                                        color: Color(0x55ff2d55),
+                                        borderRadius: BorderRadius.circular(10),
+                                        elevation: 6,
+                                        child: AlertDialog(
+                                          title: Text("Confimation?"),
+                                          content: Text("Remove from favourite"),
+                                          actions: <Widget>[
+                                            MaterialButton(
+                                                onPressed: () {},
+                                                child: Text("Yes")),
+                                            MaterialButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("No"))
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              },
+                              child: Text(
+                                "Remove",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            "\$500",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w800,
+                          GestureDetector(
+                            onTap: _incrementCounter,
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(5),
+                                    topLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Theme.of(context).accentColor,
+                                  )),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Icon(Icons.add),
+                              ),
                             ),
                           ),
-                          SizedBox(
-                            width: 10,
+                          Container(
+                            height: 30,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              width: 1,
+                              color: Theme.of(context).accentColor,
+                            )),
+                            child: Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: Center(child: Text("$counter")),
+                            ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Material(
-                                      color: Color(0x55ff2d55),
-                                      borderRadius: BorderRadius.circular(10),
-                                      elevation: 6,
-                                      child: AlertDialog(
-                                        title: Text("Confimation?"),
-                                        content: Text("Remove from favourite"),
-                                        actions: <Widget>[
-                                          MaterialButton(
-                                              onPressed: () {},
-                                              child: Text("Yes")),
-                                          MaterialButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text("No"))
-                                        ],
-                                      ),
-                                    );
-                                  });
-                            },
-                            child: Text(
-                              "Remove",
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 14,
+                            onTap: _decrementCounter,
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(5),
+                                    bottomLeft: Radius.circular(5),
+                                  ),
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Theme.of(context).accentColor,
+                                  )),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Icon(Icons.remove),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Container(
-                        height: 25,
-                        width: 25,
-                        decoration: BoxDecoration(
-                         borderRadius: BorderRadius.only(topLeft: Radius.circular(5), bottomLeft: Radius.circular(5),),
-                          
-                          border: Border.all(width: 1, color: Theme.of(context).accentColor,)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: Icon(Icons.add),
-                        ),
-                      ),
-                      Container(
-                        height: 25,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          
-                          border: Border.all(width: 1, color: Theme.of(context).accentColor,)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: Center(child: Text("1")),
-                        ),
-                      ),
-                       Container(
-                        height: 25,
-                        width: 25,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5),),
-                          
-                          border: Border.all(width: 1, color: Theme.of(context).accentColor,)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: Icon(Icons.remove),
-                        ),
-                      ),
-                    ],
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
