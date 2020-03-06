@@ -1,12 +1,8 @@
+import 'package:shoppy_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shoppy_app/screens/main_screen.dart';
-import 'package:shoppy_app/screens/otp_verification.dart';
-import 'package:shoppy_app/screens/splash_screen.dart';
-
 import 'bloc/theme.dart';
 import 'helpers/shared_pref.dart';
-import 'screens/sign_in.dart';
 import 'util/const.dart';
 
 void main() async {
@@ -48,7 +44,7 @@ class MaterialAppTheme extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Constants.appName,
       theme: theme.getTheme(),
-      home: MainScreen(),
+      home: SplashScreen(),
     );
   }
 }

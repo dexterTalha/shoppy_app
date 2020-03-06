@@ -1,3 +1,4 @@
+import 'package:shoppy_app/helpers/customer_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:shoppy_app/bloc/theme.dart';
 import 'package:shoppy_app/screens/sign_up.dart';
 import 'package:shoppy_app/util/const.dart';
 
+import 'main_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -13,13 +15,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +43,12 @@ class _SignInScreenState extends State<SignInScreen> {
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(top: 230),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                color: themeChanger.getTheme() == Constants.darkTheme? Colors.black : Colors.white
-              ),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  color: themeChanger.getTheme() == Constants.darkTheme
+                      ? Colors.black
+                      : Colors.white),
               child: Padding(
                 padding: EdgeInsets.all(23),
                 child: ListView(
@@ -57,20 +59,28 @@ class _SignInScreenState extends State<SignInScreen> {
                         color: Color(0xfff5f5f5),
                         child: StreamBuilder<String>(
                           stream: loginBloc.email,
-                          builder:(context, snap) => TextFormField(
+                          builder: (context, snap) => TextFormField(
+                            validator: (text){
+                              if(text.isEmpty){
+                                return 'Please enter email';
+                              }
+                            },
                             onChanged: loginBloc.emailChanged,
-
                             controller: _usernameController,
                             style: TextStyle(
                                 color: Colors.black, fontFamily: 'SFUIDisplay'),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                ),
+                                border: OutlineInputBorder(),
                                 labelText: 'Username',
-                                prefixIcon: Icon(Icons.person_outline, color: Colors.black,),
-                                labelStyle: TextStyle(fontSize: 18, color: Colors.black,),
-                                errorText: snap.error
-                            ),
+                                prefixIcon: Icon(
+                                  Icons.person_outline,
+                                  color: Colors.black,
+                                ),
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                                errorText: snap.error),
                           ),
                         ),
                       ),
@@ -79,46 +89,55 @@ class _SignInScreenState extends State<SignInScreen> {
                       color: Color(0xfff5f5f5),
                       child: StreamBuilder<String>(
                         stream: loginBloc.password,
-                        builder:(context, snap) =>  TextFormField(
+                        builder: (context, snap) => TextFormField(
+                          validator: (text){
+                              if(text.isEmpty){
+                                return 'Please enter password';
+                              }
+                            },
                           onChanged: loginBloc.passwordChanged,
                           controller: _passwordController,
-
                           obscureText: true,
                           style: TextStyle(
                               color: Colors.black, fontFamily: 'SFUIDisplay'),
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock_outline, color: Colors.black,),
-                              labelStyle: TextStyle(fontSize: 18, color: Colors.black,),
-                              errorText: snap.error
-                          ),
+                              prefixIcon: Icon(
+                                Icons.lock_outline,
+                                color: Colors.black,
+                              ),
+                              labelStyle: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                              errorText: snap.error),
                         ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 20),
-                      child: StreamBuilder<bool>(
-                        stream: loginBloc.submit,
-                      builder:(context, snap) => MaterialButton(
-                          onPressed:
-                             () => snap.hasData ?loginBloc.login : null,
-                          child: Text(
-                            'SIGN IN',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'SFUIDisplay',
-                              fontWeight: FontWeight.bold,
-                            ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          if(_formKey.currentState.validate()){
+                            Navigator.pushReplacement(context, CustomPageRoute(newPage: MainScreen()));
+                          }
+                        },
+                        child: Text(
+                          'SIGN IN',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'SFUIDisplay',
+                            fontWeight: FontWeight.bold,
                           ),
-                          color: Color(0xffff2d55),
-                          elevation: 0,
-                          minWidth: 400,
-                          height: 50,
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
                         ),
+                        color: Color(0xffff2d55),
+                        elevation: 0,
+                        minWidth: 400,
+                        height: 50,
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
                     Padding(
@@ -127,7 +146,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Text(
                           'Forgot your password?',
                           style: TextStyle(
-                            color: Theme.of(context).textTheme.body1.color,
+                              color: Theme.of(context).textTheme.body1.color,
                               fontFamily: 'SFUIDisplay',
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
@@ -140,7 +159,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: GestureDetector(
                           onTap: () {
                             //to signup
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpScreen()));
                           },
                           child: RichText(
                             text: TextSpan(children: [
@@ -148,7 +170,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                   text: "Don't have an account?",
                                   style: TextStyle(
                                     fontFamily: 'SFUIDisplay',
-                                    color: Theme.of(context).textTheme.body1.color,
+                                    color:
+                                        Theme.of(context).textTheme.body1.color,
                                     fontSize: 15,
                                   )),
                               TextSpan(

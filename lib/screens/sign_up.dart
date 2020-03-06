@@ -41,6 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Padding(
                 padding: EdgeInsets.only(top:15, bottom:10),
                 child: ListView(
+                  padding: const EdgeInsets.only(right: 20, left: 20),
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -62,7 +63,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Container(
                         color: Color(0xfff5f5f5),
                         child: TextFormField(
-                          maxLength: 10,
                           keyboardType: TextInputType.number,
                           style: TextStyle(
                               color: Colors.black, fontFamily: 'SFUIDisplay'),

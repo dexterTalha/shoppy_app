@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/feather.dart';
+import 'package:shoppy_app/animation/scale_delay_animation.dart';
 import 'package:shoppy_app/util/const.dart';
 import 'package:shoppy_app/widgets/badge.dart';
 
@@ -32,18 +33,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildProfileImage() {
     return Center(
-      child: Container(
-        width: 140.0,
-        height: 140.0,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/1.jpeg'),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(80.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 4.0,
+      child: ScaleDelayedAnimation(
+        delay: 300,
+        child: Container(
+          width: 140.0,
+          height: 140.0,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/1.jpeg'),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(80.0),
+            border: Border.all(
+              color: Colors.white,
+              width: 4.0,
+            ),
           ),
         ),
       ),
@@ -58,26 +62,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
       fontWeight: FontWeight.w700,
     );
 
-    return Text(
-      _fullName,
-      style: _nameTextStyle,
+    return ScaleDelayedAnimation(
+      delay: 300,
+      child: Text(
+        _fullName,
+        style: _nameTextStyle,
+      ),
     );
   }
 
   Widget _buildStatus(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      child: Text(
-        _mobile,
-        style: TextStyle(
-          fontFamily: 'SFUIDisplay',
-          color: Theme.of(context).textTheme.title.color,
-          fontSize: 20.0,
-          fontWeight: FontWeight.w300,
+    return ScaleDelayedAnimation(
+      delay: 300,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: Text(
+          _mobile,
+          style: TextStyle(
+            fontFamily: 'SFUIDisplay',
+            color: Theme.of(context).textTheme.title.color,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w300,
+          ),
         ),
       ),
     );
@@ -97,35 +107,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
       fontWeight: FontWeight.bold,
     );
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          count,
-          style: _statCountTextStyle,
-        ),
-        Text(
-          label,
-          style: _statLabelTextStyle,
-        ),
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            count,
+            style: _statCountTextStyle,
+          ),
+          Text(
+            label,
+            style: _statLabelTextStyle,
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildStatContainer() {
-    return Container(
-      height: 60.0,
-      margin: EdgeInsets.only(top: 8.0),
-      decoration: BoxDecoration(
-        color: Color(0xFFEFF4F7),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          _buildStatItem("Orders", _orders),
-          _buildStatItem("In Transit", _intransit),
-          _buildStatItem("Cancelled", _cancelled),
-        ],
+    return ScaleDelayedAnimation(
+      delay: 300,
+      child: Container(
+        height: 60.0,
+        margin: EdgeInsets.only(top: 8.0),
+        decoration: BoxDecoration(
+          color: Color(0xFFEFF4F7),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _buildStatItem("Orders", _orders),
+            _buildStatItem("In Transit", _intransit),
+            _buildStatItem("Cancelled", _cancelled),
+          ],
+        ),
       ),
     );
   }
@@ -139,23 +154,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       fontSize: 16.0,
     );
 
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        _bio,
-        textAlign: TextAlign.center,
-        style: bioTextStyle,
+    return ScaleDelayedAnimation(
+      delay: 300,
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          _bio,
+          textAlign: TextAlign.center,
+          style: bioTextStyle,
+        ),
       ),
     );
   }
 
   Widget _buildSeparator(Size screenSize) {
-    return Container(
-      width: screenSize.width / 1.6,
-      height: 2.0,
-      color: Theme.of(context).textTheme.title.color,
-      margin: EdgeInsets.only(top: 4.0),
+    return ScaleDelayedAnimation(
+      delay: 300,
+      child: Container(
+        width: screenSize.width / 1.6,
+        height: 2.0,
+        color: Theme.of(context).textTheme.title.color,
+        margin: EdgeInsets.only(top: 4.0),
+      ),
     );
   }
 
@@ -188,10 +209,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Positioned(
                   bottom: (screenSize.height / 2.6) * 0.15,
                   right: MediaQuery.of(context).size.width * 0.30,
-                  child: CircleAvatar(
-                    radius: 23,
-                    backgroundColor: Theme.of(context).accentColor,
-                    child: Icon(Icons.edit, color: Colors.white),
+                  child: ScaleDelayedAnimation(
+                    delay: 300,
+                    child: CircleAvatar(
+                      radius: 23,
+                      backgroundColor: Theme.of(context).accentColor,
+                      child: Icon(Icons.edit, color: Colors.white),
+                    ),
                   )),
             ],
           ),
