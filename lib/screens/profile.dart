@@ -1,9 +1,12 @@
+import 'package:shoppy_app/helpers/customer_page_route.dart';
 import 'package:shoppy_app/animation/delayed_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/feather.dart';
 import 'package:shoppy_app/animation/scale_delay_animation.dart';
 import 'package:shoppy_app/util/const.dart';
 import 'package:shoppy_app/widgets/badge.dart';
+
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -233,6 +236,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _buildBio(context),
               _buildSeparator(screenSize),
               _buildOptions(context, "Edit Profile", Icons.mode_edit),
+              _buildOptions(context, "Addresses", Icons.add),
               _buildOptions(context, "Logout", Icons.directions_walk)
             ],
           ),
@@ -246,46 +250,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
       delay: 500,
       child: Padding(
         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                        ),
-                        child: Icon(
-                          icon,
-                          color: Colors.white,
+        child: GestureDetector(
+          onTap: () => Navigator.push(context, CustomPageRoute(newPage: EditProfile())),
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).accentColor,
+                          ),
+                          child: Icon(
+                            icon,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                     title,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'SFUIDisplay'),
-                    ),
-                  ],
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Theme.of(context).textTheme.title.color,
-                ),
-              ],
-            )
-          ],
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                       title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'SFUIDisplay'),
+                      ),
+                    ],
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Theme.of(context).textTheme.title.color,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
