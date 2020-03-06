@@ -7,6 +7,7 @@ import 'package:shoppy_app/util/const.dart';
 import 'package:shoppy_app/widgets/badge.dart';
 
 import 'edit_profile_screen.dart';
+import 'my_orders.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -131,19 +132,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildStatContainer() {
     return ScaleDelayedAnimation(
       delay: 300,
-      child: Container(
-        height: 60.0,
-        margin: EdgeInsets.only(top: 8.0),
-        decoration: BoxDecoration(
-          color: Color(0xFFEFF4F7),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            _buildStatItem("Orders", _orders),
-            _buildStatItem("In Transit", _intransit),
-            _buildStatItem("Cancelled", _cancelled),
-          ],
+      child: GestureDetector(
+        onTap: (){
+          Navigator.push(context, CustomPageRoute(newPage: MyOrders()));
+        },
+        child: Container(
+          height: 60.0,
+          margin: EdgeInsets.only(top: 8.0),
+          decoration: BoxDecoration(
+            color: Color(0xFFEFF4F7),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              _buildStatItem("Orders", _orders),
+              _buildStatItem("In Transit", _intransit),
+              _buildStatItem("Cancelled", _cancelled),
+            ],
+          ),
         ),
       ),
     );
