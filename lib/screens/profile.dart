@@ -1,3 +1,4 @@
+import 'package:shoppy_app/animation/delayed_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/feather.dart';
 import 'package:shoppy_app/animation/scale_delay_animation.dart';
@@ -188,9 +189,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           "Profile",
-          style: TextStyle(
-            fontFamily: 'SFUIDisplay'
-          ),
+          style: TextStyle(fontFamily: 'SFUIDisplay'),
         ),
         actions: <Widget>[
           Center(
@@ -233,9 +232,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _buildStatContainer(),
               _buildBio(context),
               _buildSeparator(screenSize),
+              _buildOptions(context, "Edit Profile", Icons.mode_edit),
+              _buildOptions(context, "Logout", Icons.directions_walk)
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  _buildOptions(BuildContext context, String title, IconData icon){
+    return DelayedAnimation(
+      delay: 500,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor,
+                        ),
+                        child: Icon(
+                          icon,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                     title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'SFUIDisplay'),
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).textTheme.title.color,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
