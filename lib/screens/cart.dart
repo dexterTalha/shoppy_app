@@ -230,17 +230,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               height: 25,
                               width: 25,
                               decoration: BoxDecoration(
+                                color: Theme.of(context).accentColor,
                                   borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(5),
-                                    topLeft: Radius.circular(5),
-                                  ),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Theme.of(context).accentColor,
-                                  )),
+                                    topRight: Radius.circular(10),
+                                    topLeft: Radius.circular(10),
+                                  ),),
                               child: Padding(
                                 padding: const EdgeInsets.all(1.0),
-                                child: Icon(Icons.add),
+                                child: Icon(Icons.add, color: Colors.black,),
                               ),
                             ),
                           ),
@@ -248,13 +245,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             height: 30,
                             width: 25,
                             decoration: BoxDecoration(
-                                border: Border.all(
-                              width: 1,
-                              color: Theme.of(context).accentColor,
-                            )),
+                                color: Theme.of(context).accentColor,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)
+                                )
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.all(1.0),
-                              child: Center(child: Text("$counter")),
+                              child: Center(child: Text("$counter", style: TextStyle(color: Colors.black))),
                             ),
                           ),
                           GestureDetector(
@@ -264,13 +263,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               width: 25,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5),
+                                    bottomRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    topLeft: Radius.circular(-10),
+                                    topRight: Radius.circular(-10),
                                   ),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Theme.of(context).accentColor,
-                                  )),
+                                color: Theme.of(context).primaryColor,
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(1.0),
                                 child: Icon(Icons.remove),

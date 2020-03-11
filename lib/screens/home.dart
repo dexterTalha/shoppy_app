@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: EdgeInsets.only(right: 20),
             child: Card(
-              elevation: 6.0,
+              elevation: 10.0,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -81,9 +81,10 @@ class _HomeState extends State<Home> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10.0),
                     border: OutlineInputBorder(
+                      
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(
-                        color: Colors.white,
+                        color: Colors.white
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
